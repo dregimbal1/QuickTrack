@@ -7,7 +7,6 @@ package QuickTrack.Panels;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -26,7 +25,7 @@ public class JPAccountsManagement extends javax.swing.JPanel {
         /**
          * Debugging
          */
-        boolean bDebugging = false;
+        boolean bDebugging = true;
        
         /**
          * Initialize the JFrame for our multiple JPanels which will hold saved account data.
@@ -41,8 +40,10 @@ public class JPAccountsManagement extends javax.swing.JPanel {
         
         /**
          * Load FontAwesome from the Resources folder to include glyphicons.
+         * !! v2 removed
          */
         
+        /*
         InputStream is = JPAccountsManagement.class.getResourceAsStream("/Resources/Fonts/fontawesome-webfont.ttf");
         Font fontAwesome = null;
         try{
@@ -51,23 +52,16 @@ public class JPAccountsManagement extends javax.swing.JPanel {
         }catch (IOException | FontFormatException exp) {
             exp.printStackTrace();
         }
-
-        /**
-         * Add the Add Account icon to our panel.
-         */
-                    
-        JLabel lblAddAccount = new JLabel("\uf055");
-        lblAddAccount.setFont(fontAwesome);
-        lblAddAccount.setHorizontalAlignment(SwingConstants.CENTER);
-        jfAcctMngmtPanel.add(lblAddAccount);
+        */
         
         /**
          * Manually draw several JPanels to include account data.
          * !! Currently this is hard coded to 4 "accounts"
          */
+        JPanel jpAccounts = new JPanel(new GridLayout(0,4));
         
-        JPanel[] panel = new JPanel[5];
-        for(int i=0; i<4; i++){
+        JPanel[] panel = new JPanel[6];
+        for(int i=0; i<5; i++){
             
             panel[i] = new JPanel();
             panel[i].setName("jpBox" + String.valueOf(i));
@@ -136,9 +130,8 @@ public class JPAccountsManagement extends javax.swing.JPanel {
              * Add each container to our JFrame.
              * Notice we are drawing a margin around our element
              */
-            jfAcctMngmtPanel.add(Box.createRigidArea(new Dimension(5,0)));
-            jfAcctMngmtPanel.add(panel[i],BorderLayout.CENTER);
-            jfAcctMngmtPanel.add(Box.createRigidArea(new Dimension(5,0)));
+            jpAccounts.add(panel[i],BorderLayout.CENTER);
+            jpAccounts.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
             
             // Declare Connection Name
             JLabel lblConnectionName = new JLabel("JPBOX" + String.valueOf(i));
@@ -164,6 +157,7 @@ public class JPAccountsManagement extends javax.swing.JPanel {
             panel[i].add(Box.createRigidArea(new Dimension(5,0)));
             panel[i].add(lblUsername, BorderLayout.CENTER);
             panel[i].add(lblUrl, BorderLayout.CENTER);
+
             
             /**
              * Sruba-dub-dub push changes to our JFrame.
@@ -174,7 +168,61 @@ public class JPAccountsManagement extends javax.swing.JPanel {
                 System.out.println("[JPanel.AccountsManagement] container build complete: " + String.valueOf(i));
             } 
 
-        }
+        }//for.JPanel
+        
+        /**
+         * Add the Add Account icon to our panel.
+         */
+        JPanel jpActions = new JPanel(new BorderLayout());
+        JPanel jpButtonGroup = new JPanel();
+        
+        /**
+         * Create a button group.
+         */
+        JButton jbAddAccount = new JButton("Add Account");
+        JButton jbModifyAccounts = new JButton("Settings");
+        jpButtonGroup.add(jbAddAccount);
+        jpButtonGroup.add(jbModifyAccounts);
+        
+        /**
+         * Action listeners for button group.
+         */
+        jbAddAccount.addActionListener(new ActionListener() {
+ 
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if(bDebugging){
+                    System.out.println("[JPanel.AccountsManagement.JButton]: Add Account");
+                } 
+            }
+        }); 
+        
+        jbModifyAccounts.addActionListener(new ActionListener() {
+ 
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if(bDebugging){
+                    System.out.println("[JPanel.AccountsManagement.JButton]: Settings");
+                } 
+            }
+        }); 
+        
+        jpActions.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jpActions.add(jpButtonGroup,BorderLayout.WEST);
+
+        /**
+         * A container to hold all the layouts into one.
+         */
+        JPanel jpAccountContainer = new JPanel(new BorderLayout());
+        jpAccountContainer.add(jpActions,BorderLayout.PAGE_START);
+        jpAccountContainer.add(jpAccounts,BorderLayout.LINE_START);
+        
+        /**
+         * Add to the JFrame.
+         */
+        jfAcctMngmtPanel.add(jpAccountContainer);
    
     }//function.JPAccountsManagement
                                    
