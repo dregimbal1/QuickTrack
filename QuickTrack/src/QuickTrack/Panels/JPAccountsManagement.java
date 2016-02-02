@@ -31,7 +31,7 @@ public class JPAccountsManagement extends javax.swing.JPanel {
          * Initialize the JFrame for our multiple JPanels which will hold saved account data.
          */
         
-        JFrame jfAcctMngmtPanel = new JFrame("Account Management");
+        final JFrame jfAcctMngmtPanel = new JFrame("Account Management");
         jfAcctMngmtPanel.setVisible(true);
         jfAcctMngmtPanel.setSize(850,500);
         jfAcctMngmtPanel.setLayout(new BoxLayout(jfAcctMngmtPanel.getContentPane(),BoxLayout.X_AXIS));
@@ -192,8 +192,16 @@ public class JPAccountsManagement extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e)
             {
+            
                 if(bDebugging){
-                    System.out.println("[JPanel.AccountsManagement.JButton]: Add Account");
+                    System.out.println("[JPanel.AccountsManagement.JButton]: JDAddAccount Dialog Open");
+                } 
+                                
+                JDAddAccount jdAddAccount = new JDAddAccount(jfAcctMngmtPanel,true);
+                jdAddAccount.setVisible(true);
+                
+                if(bDebugging){
+                    System.out.println("[JPanel.AccountsManagement.JButton]: JDAddAccount Dialog Close");
                 } 
             }
         }); 
