@@ -96,6 +96,56 @@ public class HTTPService {
            
     }
     
+    /**
+     * Register Service.
+     * Create a new account and log them in
+     * 
+     * @param serverUrl
+     * @param serverKey
+     * @param username
+     * @param password
+     * @param email
+     * @return JSONObject callback
+     * @throws org.apache.http.client.ClientProtocolException 
+     */
+    public JSONObject register(String serverUrl, String serverKey, String username, String password, String email) throws ClientProtocolException, IOException
+    {
+        JSONObject callback = new JSONObject();
+        
+        // set the server_url and localstorage
+        server_url = serverUrl;
+        
+        // Connect out to the server URL
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(serverUrl + "/register");
+        StringEntity input = new StringEntity("{\"username\":\""+username+"\",\"password\":\""+password+"\",\"email\":\""+email+"\",\"key\":\""+serverKey+"\"}");
+        post.setEntity(input);
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+         
+         callback = new JSONObject(line);
+         if("error".equals(callback.getString("status")))
+         {
+             // Register failed
+         }
+         else
+         {
+             // Register success; Set and store the access token
+             JSONObject data = (JSONObject) callback.get("response");
+             access_token = data.getString("token");
+
+         }
+         
+         return callback;
+
+        }
+        
+        // Promise
+        return callback;
+    }
+    
     public static JSONObject getDetails() throws IOException
     {
         JSONObject callback = new JSONObject();

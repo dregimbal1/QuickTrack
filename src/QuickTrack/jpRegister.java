@@ -8,6 +8,10 @@ package QuickTrack;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.LayoutManager;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.JSONObject;
 
 /**
  *
@@ -45,6 +49,7 @@ public class jpRegister extends javax.swing.JPanel {
         lblServerKey = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
+        lblError = new javax.swing.JLabel();
 
         lblRegister.setText("Register");
 
@@ -59,6 +64,11 @@ public class jpRegister extends javax.swing.JPanel {
         lblServerKey.setText("Server Key");
 
         btnRegister.setText("Register!");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -87,21 +97,25 @@ public class jpRegister extends javax.swing.JPanel {
                             .addComponent(lblServerUrl)
                             .addComponent(lblServerKey))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUsername)
-                            .addComponent(txtEmail)
-                            .addComponent(txtServerUrl)
-                            .addComponent(txtServerKey)
-                            .addComponent(txtPassword)
-                            .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(127, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtUsername)
+                                .addComponent(txtEmail)
+                                .addComponent(txtServerUrl)
+                                .addComponent(txtServerKey)
+                                .addComponent(txtPassword)
+                                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(lblRegister)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUsername))
@@ -139,11 +153,51 @@ public class jpRegister extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // TODO add your handling code here:
+        
+        try 
+        {
+            
+            // Send register details to our HTTP Service
+            JSONObject response = new HTTPService().register(txtServerUrl.getText(), txtServerKey.getText(), txtUsername.getText(), new String(txtPassword.getPassword()), txtEmail.getText());
+            
+            // Check to see if there was an error while logging in
+            if("error".equals(response.getString("status")))
+            {
+                // Field is missing
+                lblError.setText(response.getString("message"));
+            }
+            else
+            {
+                // Fetch some useful details about the user
+                jpOverview.getAboutMe();
+                
+                // Switch the panel to jpOverview
+                Container parent = this.getParent(); 
+                LayoutManager layout = getParent().getLayout();
+                if (layout instanceof CardLayout) {
+                    CardLayout cardLayout = (CardLayout)layout;
+                    cardLayout.show(parent, "jpOverview");
+                }
+                
+            }
+            
+            
+        } catch (IOException ex) {
+            
+            // Fatal error; The program could not render/compile
+            Logger.getLogger(jpLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblError;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblRegister;
     private javax.swing.JLabel lblServerKey;

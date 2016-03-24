@@ -5,22 +5,23 @@
  */
 package QuickTrack;
 
-//import QuickTrack.HTTPService;
-
 import java.awt.CardLayout;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JPanel;
 import org.json.*;
-import QuickTrack.jpRegister;
 import java.awt.Container;
 import java.awt.LayoutManager;
 
+/*
+import QuickTrack.HTTPService;
 import QuickTrack.jpOverview;
-
-//import org.jsoup.Jsoup;
-//import org.jsoup.nodes.Document;
+import QuickTrack.jpRegister;
+import QuickTrack.jpOverview;
+import javax.swing.JPanel;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+*/
 
 
 /**
