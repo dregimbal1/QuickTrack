@@ -5,6 +5,10 @@
  */
 package QuickTrack;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Aras
@@ -114,10 +118,14 @@ public class jpCreateandEditTask extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCreateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCreateTaskActionPerformed
-        // TODO add your handling code here:
-        
-        
-        HTTPService.addTask(txtName.getText(), txtDescription.getText(), txtDate.getText(), cbxNotify.getSelected());
+        try {
+            // TODO add your handling code here:
+            
+            
+            HTTPService.addTask(txtName.getText(), jtaTaskDescription.getText(), jtfTaskDueDate.getText(), jcbNotify.isEnabled());
+        } catch (IOException ex) {
+            Logger.getLogger(jpCreateandEditTask.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jbCreateTaskActionPerformed
 
