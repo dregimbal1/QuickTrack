@@ -41,6 +41,7 @@ public class jfMain extends javax.swing.JFrame {
         jpMain = new javax.swing.JPanel();
         jpLogin = new QuickTrack.jpLogin();
         jpRegister = new QuickTrack.jpRegister();
+        jpCreateTask = new QuickTrack.jpCreateTask();
         jpOverview = new QuickTrack.jpOverview();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,6 +49,7 @@ public class jfMain extends javax.swing.JFrame {
         jpMain.setLayout(new java.awt.CardLayout());
         jpMain.add(jpLogin, "jpLogin");
         jpMain.add(jpRegister, "jpRegister");
+        jpMain.add(jpCreateTask, "jpCreateTask");
         jpMain.add(jpOverview, "jpOverview");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -56,7 +58,7 @@ public class jfMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -106,6 +108,7 @@ public class jfMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private QuickTrack.jpCreateTask jpCreateTask;
     private QuickTrack.jpLogin jpLogin;
     private javax.swing.JPanel jpMain;
     private QuickTrack.jpOverview jpOverview;

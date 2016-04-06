@@ -5,6 +5,9 @@
  */
 package QuickTrack;
 
+import java.awt.CardLayout;
+import java.awt.Container;
+import java.awt.LayoutManager;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,8 +67,16 @@ public class jpOverview extends javax.swing.JPanel {
     private void initComponents() {
 
         lblWelcomeMessage = new javax.swing.JLabel();
+        btnAddTask = new javax.swing.JButton();
 
         lblWelcomeMessage.setText("Welcome back!");
+
+        btnAddTask.setText("Add Task");
+        btnAddTask.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddTaskActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,18 +86,37 @@ public class jpOverview extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addComponent(lblWelcomeMessage)
                 .addContainerGap(284, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAddTask)
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(lblWelcomeMessage)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
+                .addComponent(btnAddTask)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTaskActionPerformed
+        // TODO add your handling code here:
+        
+        // Switch the panel to jpOverview
+        Container parent = this.getParent(); 
+        LayoutManager layout = getParent().getLayout();
+        if (layout instanceof CardLayout) {
+            CardLayout cardLayout = (CardLayout)layout;
+            cardLayout.show(parent, "jpCreateTask");
+        }
+    }//GEN-LAST:event_btnAddTaskActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddTask;
     private static javax.swing.JLabel lblWelcomeMessage;
     // End of variables declaration//GEN-END:variables
 }

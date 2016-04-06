@@ -13,12 +13,12 @@ import java.util.logging.Logger;
  *
  * @author Aras
  */
-public class jpCreateandEditTask extends javax.swing.JPanel {
+public class jpCreateTask extends javax.swing.JPanel {
 
     /**
      * Creates new form jpCreateandEditTask
      */
-    public jpCreateandEditTask() {
+    public jpCreateTask() {
         initComponents();
     }
 
@@ -121,10 +121,14 @@ public class jpCreateandEditTask extends javax.swing.JPanel {
         try {
             // TODO add your handling code here:
             
+            String response = HTTPService.addTask(txtName.getText(), jtaTaskDescription.getText(), jtfTaskDueDate.getText(), jcbNotify.isEnabled());
             
-            HTTPService.addTask(txtName.getText(), jtaTaskDescription.getText(), jtfTaskDueDate.getText(), jcbNotify.isEnabled());
+            System.out.println("response = " + response);
+            
+            // Popup to say the message.. then close the box
+            
         } catch (IOException ex) {
-            Logger.getLogger(jpCreateandEditTask.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(jpCreateTask.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jbCreateTaskActionPerformed
