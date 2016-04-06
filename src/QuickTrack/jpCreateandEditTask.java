@@ -28,7 +28,7 @@ public class jpCreateandEditTask extends javax.swing.JPanel {
     private void initComponents() {
 
         jlTaskName = new javax.swing.JLabel();
-        jtfTaskName = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         jlTaskDescription = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaTaskDescription = new javax.swing.JTextArea();
@@ -48,6 +48,11 @@ public class jpCreateandEditTask extends javax.swing.JPanel {
         jlTaskDueDate.setText("Task Due Date ");
 
         jbCreateTask.setText("Create Task");
+        jbCreateTask.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCreateTaskActionPerformed(evt);
+            }
+        });
 
         jcbNotify.setText("Notify all group members?");
 
@@ -65,7 +70,7 @@ public class jpCreateandEditTask extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jtfTaskName, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(88, 88, 88))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -87,7 +92,7 @@ public class jpCreateandEditTask extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfTaskName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlTaskName))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -108,6 +113,14 @@ public class jpCreateandEditTask extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbCreateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCreateTaskActionPerformed
+        // TODO add your handling code here:
+        
+        
+        HTTPService.addTask(txtName.getText(), txtDescription.getText(), txtDate.getText(), cbxNotify.getSelected());
+        
+    }//GEN-LAST:event_jbCreateTaskActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
@@ -118,6 +131,6 @@ public class jpCreateandEditTask extends javax.swing.JPanel {
     private javax.swing.JLabel jlTaskName;
     private javax.swing.JTextArea jtaTaskDescription;
     private javax.swing.JTextField jtfTaskDueDate;
-    private javax.swing.JTextField jtfTaskName;
+    private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }

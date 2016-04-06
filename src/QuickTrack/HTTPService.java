@@ -36,6 +36,7 @@ import org.apache.commons.codec.EncoderException;
  * Available endpoints:
  *  login
  *  getDetails
+ *  addTask
  * 
  * @author David Regimbal, Aras Masalaitis, Jesse Wasko, Sumedh Savanur, Gauri Khawadkar <bk.psu.edu>
  */
@@ -144,6 +145,50 @@ public class HTTPService {
         
         // Promise
         return callback;
+    }
+    
+    /**
+     * addTask.
+     * Create a new account and log them in
+     * 
+     * @return JSONObject callback
+     * @throws org.apache.http.client.ClientProtocolException 
+     */
+    public static String addTask(String name, String descriotion, String date, Boolean notify) throws ClientProtocolException, IOException
+    {
+        JSONObject callback = new JSONObject();
+        
+        // Connect out to the server URL
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(server_url + "/register");
+        //StringEntity input = new StringEntity("{\"username\":\""+username+"\",\"password\":\""+password+"\",\"email\":\""+email+"\",\"key\":\""+serverKey+"\"}");
+        //post.setEntity(input);
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+         
+         callback = new JSONObject(line);
+         if("error".equals(callback.getString("status")))
+         {
+             // Register failed
+         }
+         else
+         {
+             // Register success; Set and store the access token
+             JSONObject data = (JSONObject) callback.get("response");
+             //access_token = data.getString("token");
+
+         }
+         
+         //return callback;
+         return "";
+
+        }
+        
+        // Promise
+        //return callback;
+        return "";
     }
     
     public static JSONObject getDetails() throws IOException

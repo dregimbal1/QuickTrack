@@ -27,7 +27,7 @@
                       <EmptySpace pref="50" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jtfTaskName" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="txtName" min="-2" pref="70" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -59,7 +59,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jtfTaskName" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtName" min="-2" max="-2" attributes="0"/>
                   <Component id="jlTaskName" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -92,7 +92,7 @@
         <Property name="text" type="java.lang.String" value="Task Name"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtfTaskName">
+    <Component class="javax.swing.JTextField" name="txtName">
     </Component>
     <Component class="javax.swing.JLabel" name="jlTaskDescription">
       <Properties>
@@ -125,6 +125,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Create Task"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCreateTaskActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcbNotify">
       <Properties>
