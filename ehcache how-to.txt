@@ -1,0 +1,19 @@
+link: http://www.ehcache.org/documentation/3.0/getting-started.html
+
+class localstorage {
+
+
+	public localstorage {
+	
+			...
+			
+			localstorage = ...
+			
+			
+	public put(name,value) {
+	
+		localstorage.put(name, value)
+		
+	public get(name)
+	
+		ren localstg.get(name);
