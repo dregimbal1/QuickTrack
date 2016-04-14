@@ -38,6 +38,7 @@ public class jpGroups extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtGroupAssignments = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        btnCreateGroup = new javax.swing.JButton();
 
         btnGoBack.setText("Go Back");
         btnGoBack.addActionListener(new java.awt.event.ActionListener() {
@@ -75,24 +76,34 @@ public class jpGroups extends javax.swing.JPanel {
 
         jLabel1.setText("Group Assignments");
 
+        btnCreateGroup.setText("Create");
+        btnCreateGroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateGroupActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 91, Short.MAX_VALUE)
                         .addComponent(btnManageGroups)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCreateGroup)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnJoinGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGoBack))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(btnGoBack)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -106,7 +117,8 @@ public class jpGroups extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGoBack)
                     .addComponent(btnJoinGroup)
-                    .addComponent(btnManageGroups)))
+                    .addComponent(btnManageGroups)
+                    .addComponent(btnCreateGroup)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -140,8 +152,19 @@ public class jpGroups extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnManageGroupsActionPerformed
 
+    private void btnCreateGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateGroupActionPerformed
+        // Switch the panel
+        Container parent = this.getParent(); 
+        LayoutManager layout = getParent().getLayout();
+        if (layout instanceof CardLayout) {
+            CardLayout cardLayout = (CardLayout)layout;
+            cardLayout.show(parent, "jpCreateGroup");
+        }
+    }//GEN-LAST:event_btnCreateGroupActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCreateGroup;
     private javax.swing.JButton btnGoBack;
     private javax.swing.JButton btnJoinGroup;
     private javax.swing.JButton btnManageGroups;

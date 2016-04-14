@@ -27,6 +27,7 @@ import org.apache.http.client.methods.HttpGet;
  *  register
  *  addTask
  *  getTask
+ *  createGroup
  *  joinGroup
  *  getGroups
  *  leaveGroup
@@ -208,6 +209,46 @@ public class HTTPService {
         
         // Build our JSON payload
         StringEntity input = new StringEntity("{\"table\": \"tasks\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + 12 + "\"}}");
+        post.setEntity(input);
+        
+        // Call our server
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            
+            // Return our JSON response
+            return new JSONObject(line);
+
+        }
+     
+        // Promise
+        return callback;
+    }
+ 
+    /**
+     * createGroup.
+     * make a new group with this user as the owner
+     * 
+     * @return JSONObject callback
+     * @throws org.apache.http.client.ClientProtocolException 
+     */
+    public static JSONObject createGroup(String name) throws ClientProtocolException, IOException
+    {
+        
+        // initialize our object
+        JSONObject callback = new JSONObject();
+        
+        // Connect out to the server URL
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(server_url + "/queryInsert");
+        
+        // This request must be authenticated
+        post.setHeader("IstAuth", "Bearer " + access_token);
+        post.setHeader("Content-Type","application/json");
+        
+        // Build our JSON payload
+        StringEntity input = new StringEntity("{\"table\": \"groups\", \"data\": { \"name\":\"" + name + "\"}}");
         post.setEntity(input);
         
         // Call our server

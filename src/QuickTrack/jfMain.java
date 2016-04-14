@@ -47,6 +47,7 @@ public class jfMain extends javax.swing.JFrame {
         jpGroups = new QuickTrack.jpGroups();
         jpJoinGroup = new QuickTrack.jpJoinGroup();
         jpManageGroups = new QuickTrack.jpManageGroups();
+        jpCreateGroup = new QuickTrack.jpCreateGroup();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +60,7 @@ public class jfMain extends javax.swing.JFrame {
         jpMain.add(jpGroups, "jpGroups");
         jpMain.add(jpJoinGroup, "jpJoinGroup");
         jpMain.add(jpManageGroups, "jpManageGroups");
+        jpMain.add(jpCreateGroup, "jpCreateGroup");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,6 +118,7 @@ public class jfMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private QuickTrack.jpCreateGroup jpCreateGroup;
     private QuickTrack.jpCreateTask jpCreateTask;
     private QuickTrack.jpGroups jpGroups;
     private QuickTrack.jpJoinGroup jpJoinGroup;
