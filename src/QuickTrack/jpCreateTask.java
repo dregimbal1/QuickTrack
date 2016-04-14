@@ -5,9 +5,18 @@
  */
 package QuickTrack;
 
+import java.awt.CardLayout;
+import java.awt.Container;
+import java.awt.LayoutManager;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+//import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+//import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+//import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import org.json.JSONObject;
 
 /**
  *
@@ -31,25 +40,57 @@ public class jpCreateTask extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jDialog2 = new javax.swing.JDialog();
+        jDatePickerUtil1 = new net.sourceforge.jdatepicker.util.JDatePickerUtil();
+        dateComponentFormatter1 = new net.sourceforge.jdatepicker.impl.DateComponentFormatter();
+        jDateComponentFactory1 = new net.sourceforge.jdatepicker.JDateComponentFactory();
+        jDatePickerUtil2 = new net.sourceforge.jdatepicker.util.JDatePickerUtil();
+        utilDateModel1 = new net.sourceforge.jdatepicker.impl.UtilDateModel();
+        utilCalendarModel1 = new net.sourceforge.jdatepicker.impl.UtilCalendarModel();
+        sqlDateModel1 = new net.sourceforge.jdatepicker.impl.SqlDateModel();
         jlTaskName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         jlTaskDescription = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaTaskDescription = new javax.swing.JTextArea();
         jlTaskDueDate = new javax.swing.JLabel();
-        jtfTaskDueDate = new javax.swing.JTextField();
         jbCreateTask = new javax.swing.JButton();
         jcbNotify = new javax.swing.JCheckBox();
+        jdfTaskDueDate = new org.jdesktop.swingx.JXDatePicker();
+        btnGoBack = new javax.swing.JButton();
 
-        jlTaskName.setText("Task Name");
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
-        jlTaskDescription.setText("Task Description");
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        jlTaskName.setText("Name");
+
+        jlTaskDescription.setText("Description");
 
         jtaTaskDescription.setColumns(20);
         jtaTaskDescription.setRows(5);
         jScrollPane1.setViewportView(jtaTaskDescription);
 
-        jlTaskDueDate.setText("Task Due Date ");
+        jlTaskDueDate.setText("Due Date ");
 
         jbCreateTask.setText("Create Task");
         jbCreateTask.addActionListener(new java.awt.event.ActionListener() {
@@ -60,6 +101,13 @@ public class jpCreateTask extends javax.swing.JPanel {
 
         jcbNotify.setText("Notify all group members?");
 
+        btnGoBack.setText("Go Back");
+        btnGoBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGoBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,37 +115,37 @@ public class jpCreateTask extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlTaskName)
-                            .addComponent(jlTaskDescription))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(88, 88, 88))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlTaskDueDate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jtfTaskDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(89, 89, 89))))
+                    .addComponent(jlTaskName)
+                    .addComponent(jlTaskDescription)
+                    .addComponent(jlTaskDueDate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jdfTaskDueDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45))
             .addGroup(layout.createSequentialGroup()
                 .addGap(118, 118, 118)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcbNotify)
-                    .addComponent(jbCreateTask, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jcbNotify)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbCreateTask, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGoBack))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlTaskName))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jlTaskName)
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -105,27 +153,46 @@ public class jpCreateTask extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addComponent(jlTaskDescription)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlTaskDueDate)
-                    .addComponent(jtfTaskDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                    .addComponent(jdfTaskDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addComponent(jcbNotify)
                 .addGap(18, 18, 18)
-                .addComponent(jbCreateTask)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbCreateTask)
+                    .addComponent(btnGoBack))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCreateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCreateTaskActionPerformed
         try {
-            // TODO add your handling code here:
+
+            // start by calling our server to add a task
+            JSONObject response = HTTPService.addTask(txtName.getText(), jtaTaskDescription.getText(), jdfTaskDueDate.getDate(), jcbNotify.isSelected());
             
-            String response = HTTPService.addTask(txtName.getText(), jtaTaskDescription.getText(), jtfTaskDueDate.getText(), jcbNotify.isEnabled());
-            
-            System.out.println("response = " + response);
-            
-            // Popup to say the message.. then close the box
+            // Display a message and returns us home on success
+            if("error".equals(response.getString("status")))
+            {
+                JFrame PopUp = new JFrame();
+                JOptionPane.showMessageDialog(PopUp,"There was a problem adding this task. Try again!");               
+            }
+            else
+            {
+                JFrame PopUp = new JFrame();
+                JOptionPane.showMessageDialog(PopUp,"Task Added");
+                
+                // Switch the panel
+                Container parent = this.getParent(); 
+                LayoutManager layout = getParent().getLayout();
+                if (layout instanceof CardLayout) {
+                    CardLayout cardLayout = (CardLayout)layout;
+                    cardLayout.show(parent, "jpOverview");
+                }
+                
+            }
             
         } catch (IOException ex) {
             Logger.getLogger(jpCreateTask.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,16 +200,36 @@ public class jpCreateTask extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jbCreateTaskActionPerformed
 
+    private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
+        // Switch the panel
+        Container parent = this.getParent(); 
+        LayoutManager layout = getParent().getLayout();
+        if (layout instanceof CardLayout) {
+            CardLayout cardLayout = (CardLayout)layout;
+            cardLayout.show(parent, "jpOverview");
+        }
+    }//GEN-LAST:event_btnGoBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGoBack;
+    private net.sourceforge.jdatepicker.impl.DateComponentFormatter dateComponentFormatter1;
+    private net.sourceforge.jdatepicker.JDateComponentFactory jDateComponentFactory1;
+    private net.sourceforge.jdatepicker.util.JDatePickerUtil jDatePickerUtil1;
+    private net.sourceforge.jdatepicker.util.JDatePickerUtil jDatePickerUtil2;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbCreateTask;
     private javax.swing.JCheckBox jcbNotify;
+    private org.jdesktop.swingx.JXDatePicker jdfTaskDueDate;
     private javax.swing.JLabel jlTaskDescription;
     private javax.swing.JLabel jlTaskDueDate;
     private javax.swing.JLabel jlTaskName;
     private javax.swing.JTextArea jtaTaskDescription;
-    private javax.swing.JTextField jtfTaskDueDate;
+    private net.sourceforge.jdatepicker.impl.SqlDateModel sqlDateModel1;
     private javax.swing.JTextField txtName;
+    private net.sourceforge.jdatepicker.impl.UtilCalendarModel utilCalendarModel1;
+    private net.sourceforge.jdatepicker.impl.UtilDateModel utilDateModel1;
     // End of variables declaration//GEN-END:variables
 }

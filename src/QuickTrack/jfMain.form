@@ -73,6 +73,34 @@
             </Constraint>
           </Constraints>
         </Component>
+        <Component class="QuickTrack.jpListTasks" name="jpListTasks">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="jpListTasks"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="QuickTrack.jpGroups" name="jpGroups">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="jpGroups"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="QuickTrack.jpJoinGroup" name="jpJoinGroup">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="jpJoinGroup"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="QuickTrack.jpManageGroups" name="jpManageGroups">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="jpManageGroups"/>
+            </Constraint>
+          </Constraints>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

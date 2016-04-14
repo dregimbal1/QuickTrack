@@ -15,19 +15,8 @@ import org.json.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Date;
 import org.apache.http.client.methods.HttpGet;
-
-/*
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import org.apache.commons.codec.binary.Base64;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import org.apache.commons.codec.EncoderException;
-*/
 
 /**
  * HTTP Service.
@@ -35,8 +24,14 @@ import org.apache.commons.codec.EncoderException;
  * 
  * Available endpoints:
  *  login
- *  getDetails
+ *  register
  *  addTask
+ *  getTask
+ *  joinGroup
+ *  getGroups
+ *  leaveGroup
+ *  getDetails
+ * 
  * 
  * @author David Regimbal, Aras Masalaitis, Jesse Wasko, Sumedh Savanur, Gauri Khawadkar <bk.psu.edu>
  */
@@ -154,40 +149,200 @@ public class HTTPService {
      * @return JSONObject callback
      * @throws org.apache.http.client.ClientProtocolException 
      */
-    public static String addTask(String name, String description, String date, Boolean notify) throws ClientProtocolException, IOException
+    public static JSONObject addTask(String name, String description, Date date, Boolean notify) throws ClientProtocolException, IOException
     {
+        
+        // initialize our object
+        JSONObject callback = new JSONObject();
         
         // Connect out to the server URL
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(server_url + "/queryInsert");
-        StringEntity input = new StringEntity("{\"table\": \"tasks\", \"data\": { \"name\": \""+name+"\", \"description\": \""+description+"\"  }}");
+        
+        // This request must be authenticated
+        post.setHeader("IstAuth", "Bearer " + access_token);
+        post.setHeader("Content-Type","application/json");
+        
+        // convert due date to UNIX
+        long unixTime = date.getTime()/1000;
+        
+        // Build our JSON payload
+        StringEntity input = new StringEntity("{\"table\": \"tasks\", \"data\": { \"name\": \""+name+"\", \"description\": \""+description+"\", \"duedate\": \""+unixTime+"\", \"notify\": \""+notify.booleanValue()+"\"  }}");
         post.setEntity(input);
+        
+        // Call our server
         HttpResponse response = client.execute(post);
         BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
         String line = "";
         while ((line = rd.readLine()) != null) {
          
-         JSONObject callback = new JSONObject(line);
-         if("error".equals(callback.getString("status")))
-         {
-             // Register failed
-         }
-         else
-         {
-             // Register success; Set and store the access token
-             //JSONObject data = (JSONObject) callback.get("response");
-             //access_token = data.getString("token");
-
-         }
-         
-         //return callback;
-         return callback.get("response").toString();
+            // Return our JSON response
+            return new JSONObject(line);
 
         }
-        
+     
         // Promise
-        //return callback;
-        return "";
+        return callback;
+    }
+    
+    /**
+     * getTasks.
+     * get all tasks for a specific user
+     * 
+     * @return JSONObject callback
+     * @throws org.apache.http.client.ClientProtocolException 
+     */
+    public static JSONObject getTasks() throws ClientProtocolException, IOException
+    {
+        
+        // initialize our object
+        JSONObject callback = new JSONObject();
+        
+        // Connect out to the server URL
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(server_url + "/querySelect");
+        
+        // This request must be authenticated
+        post.setHeader("IstAuth", "Bearer " + access_token);
+        post.setHeader("Content-Type","application/json");
+        
+        // Build our JSON payload
+        StringEntity input = new StringEntity("{\"table\": \"tasks\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + 12 + "\"}}");
+        post.setEntity(input);
+        
+        // Call our server
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            
+            // Return our JSON response
+            return new JSONObject(line);
+
+        }
+     
+        // Promise
+        return callback;
+    }
+    
+    /**
+     * joinGroup.
+     * add a user to specified group id
+     * 
+     * @return JSONObject callback
+     * @throws org.apache.http.client.ClientProtocolException 
+     */
+    public static JSONObject joinGroup(String id) throws ClientProtocolException, IOException
+    {
+        
+        // initialize our object
+        JSONObject callback = new JSONObject();
+        
+        // Connect out to the server URL
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(server_url + "/querySelect");
+        
+        // This request must be authenticated
+        post.setHeader("IstAuth", "Bearer " + access_token);
+        post.setHeader("Content-Type","application/json");
+        
+        // Build our JSON payload
+        StringEntity input = new StringEntity("{\"table\": \"groups\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + 12 + "\"}}");
+        post.setEntity(input);
+        
+        // Call our server
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            
+            // Return our JSON response
+            return new JSONObject(line);
+
+        }
+     
+        // Promise
+        return callback;
+    }
+    
+    /**
+     * getGroups.
+     * get all group[s for a specific user
+     * 
+     * @return JSONObject callback
+     * @throws org.apache.http.client.ClientProtocolException 
+     */
+    public static JSONObject getGroups() throws ClientProtocolException, IOException
+    {
+        
+        // initialize our object
+        JSONObject callback = new JSONObject();
+        
+        // Connect out to the server URL
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(server_url + "/querySelect");
+        
+        // This request must be authenticated
+        post.setHeader("IstAuth", "Bearer " + access_token);
+        post.setHeader("Content-Type","application/json");
+        
+        // Build our JSON payload
+        StringEntity input = new StringEntity("{\"table\": \"groups\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + 12 + "\"}}");
+        post.setEntity(input);
+        
+        // Call our server
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            
+            // Return our JSON response
+            return new JSONObject(line);
+
+        }
+     
+        // Promise
+        return callback;
+    }
+    
+    /**
+     * leaveGroup.
+     * remove the user from a specified group
+     * 
+     * @return JSONObject callback
+     * @throws org.apache.http.client.ClientProtocolException 
+     */
+    public static JSONObject leaveGroup(int id) throws ClientProtocolException, IOException
+    {
+        
+        // initialize our object
+        JSONObject callback = new JSONObject();
+        
+        // Connect out to the server URL
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(server_url + "/querySelect");
+        
+        // This request must be authenticated
+        post.setHeader("IstAuth", "Bearer " + access_token);
+        post.setHeader("Content-Type","application/json");
+        
+        // Build our JSON payload
+        StringEntity input = new StringEntity("{\"table\": \"groups\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + 12 + "\"}}");
+        post.setEntity(input);
+        
+        // Call our server
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            
+            // Return our JSON response
+            return new JSONObject(line);
+
+        }
+     
+        // Promise
+        return callback;
     }
     
     public static JSONObject getDetails() throws IOException

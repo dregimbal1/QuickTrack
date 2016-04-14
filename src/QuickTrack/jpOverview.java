@@ -68,6 +68,9 @@ public class jpOverview extends javax.swing.JPanel {
 
         lblWelcomeMessage = new javax.swing.JLabel();
         btnAddTask = new javax.swing.JButton();
+        btnListTasks = new javax.swing.JButton();
+        btnGroups = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
 
         lblWelcomeMessage.setText("Welcome back!");
 
@@ -78,18 +81,46 @@ public class jpOverview extends javax.swing.JPanel {
             }
         });
 
+        btnListTasks.setText("List Tasks");
+        btnListTasks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListTasksActionPerformed(evt);
+            }
+        });
+
+        btnGroups.setText("Groups");
+        btnGroups.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGroupsActionPerformed(evt);
+            }
+        });
+
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(lblWelcomeMessage)
-                .addContainerGap(284, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAddTask)
-                .addGap(14, 14, 14))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblWelcomeMessage)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnGroups)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnListTasks, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAddTask)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExit)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,14 +128,17 @@ public class jpOverview extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addComponent(lblWelcomeMessage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
-                .addComponent(btnAddTask)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddTask)
+                    .addComponent(btnListTasks)
+                    .addComponent(btnGroups)
+                    .addComponent(btnExit))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTaskActionPerformed
-        // TODO add your handling code here:
-        
+
         // Switch the panel to jpOverview
         Container parent = this.getParent(); 
         LayoutManager layout = getParent().getLayout();
@@ -114,9 +148,39 @@ public class jpOverview extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAddTaskActionPerformed
 
+    private void btnListTasksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListTasksActionPerformed
+
+        jpListTasks.setTasks();
+        
+        // Switch the panel to jpOverview
+        Container parent = this.getParent(); 
+        LayoutManager layout = getParent().getLayout();
+        if (layout instanceof CardLayout) {
+            CardLayout cardLayout = (CardLayout)layout;
+            cardLayout.show(parent, "jpListTasks");
+        }
+    }//GEN-LAST:event_btnListTasksActionPerformed
+
+    private void btnGroupsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGroupsActionPerformed
+        // Switch the panel
+        Container parent = this.getParent(); 
+        LayoutManager layout = getParent().getLayout();
+        if (layout instanceof CardLayout) {
+            CardLayout cardLayout = (CardLayout)layout;
+            cardLayout.show(parent, "jpGroups");
+        }
+    }//GEN-LAST:event_btnGroupsActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddTask;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnGroups;
+    private javax.swing.JButton btnListTasks;
     private static javax.swing.JLabel lblWelcomeMessage;
     // End of variables declaration//GEN-END:variables
 }

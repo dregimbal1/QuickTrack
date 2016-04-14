@@ -43,6 +43,10 @@ public class jfMain extends javax.swing.JFrame {
         jpRegister = new QuickTrack.jpRegister();
         jpCreateTask = new QuickTrack.jpCreateTask();
         jpOverview = new QuickTrack.jpOverview();
+        jpListTasks = new QuickTrack.jpListTasks();
+        jpGroups = new QuickTrack.jpGroups();
+        jpJoinGroup = new QuickTrack.jpJoinGroup();
+        jpManageGroups = new QuickTrack.jpManageGroups();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,6 +55,10 @@ public class jfMain extends javax.swing.JFrame {
         jpMain.add(jpRegister, "jpRegister");
         jpMain.add(jpCreateTask, "jpCreateTask");
         jpMain.add(jpOverview, "jpOverview");
+        jpMain.add(jpListTasks, "jpListTasks");
+        jpMain.add(jpGroups, "jpGroups");
+        jpMain.add(jpJoinGroup, "jpJoinGroup");
+        jpMain.add(jpManageGroups, "jpManageGroups");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,7 +73,7 @@ public class jfMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                .addComponent(jpMain, javax.swing.GroupLayout.PREFERRED_SIZE, 292, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -109,8 +117,12 @@ public class jfMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private QuickTrack.jpCreateTask jpCreateTask;
+    private QuickTrack.jpGroups jpGroups;
+    private QuickTrack.jpJoinGroup jpJoinGroup;
+    private QuickTrack.jpListTasks jpListTasks;
     private QuickTrack.jpLogin jpLogin;
     private javax.swing.JPanel jpMain;
+    private QuickTrack.jpManageGroups jpManageGroups;
     private QuickTrack.jpOverview jpOverview;
     private QuickTrack.jpRegister jpRegister;
     // End of variables declaration//GEN-END:variables
