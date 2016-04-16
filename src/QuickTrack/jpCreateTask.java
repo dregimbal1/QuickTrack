@@ -11,8 +11,10 @@ import java.awt.LayoutManager;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.json.JSONArray;
 //import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 //import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 //import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -59,6 +61,7 @@ public class jpCreateTask extends javax.swing.JPanel {
         jcbNotify = new javax.swing.JCheckBox();
         jdfTaskDueDate = new org.jdesktop.swingx.JXDatePicker();
         btnGoBack = new javax.swing.JButton();
+        jcbGroups = new javax.swing.JComboBox<>();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -100,6 +103,16 @@ public class jpCreateTask extends javax.swing.JPanel {
         });
 
         jcbNotify.setText("Notify all group members?");
+        jcbNotify.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbNotifyItemStateChanged(evt);
+            }
+        });
+        jcbNotify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbNotifyActionPerformed(evt);
+            }
+        });
 
         btnGoBack.setText("Go Back");
         btnGoBack.addActionListener(new java.awt.event.ActionListener() {
@@ -108,58 +121,65 @@ public class jpCreateTask extends javax.swing.JPanel {
             }
         });
 
+        jcbGroups.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbGroups.setEnabled(false);
+        jcbGroups.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbGroupsItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(jbCreateTask, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGoBack))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlTaskName)
                     .addComponent(jlTaskDescription)
                     .addComponent(jlTaskDueDate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jdfTaskDueDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jcbNotify)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbCreateTask, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnGoBack))))
+                    .addComponent(jdfTaskDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(78, 78, 78))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap()))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jcbGroups, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jcbNotify, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jlTaskName)
-                        .addGap(12, 12, 12))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jlTaskDescription)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlTaskDueDate)
-                    .addComponent(jdfTaskDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
-                .addComponent(jcbNotify)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlTaskName))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jlTaskDescription)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jdfTaskDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlTaskDueDate))
                 .addGap(18, 18, 18)
+                .addComponent(jcbNotify)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jcbGroups, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCreateTask)
                     .addComponent(btnGoBack))
@@ -167,6 +187,34 @@ public class jpCreateTask extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public static void setjcbGroups()
+    {
+        jcbGroups.removeAllItems();
+        jcbGroups.addItem("Select Group");
+        
+        try {
+            
+            JSONObject response = HTTPService.getGroups();
+            
+            JSONArray rows = response.getJSONArray("response");
+            
+            for(int i = 0; i < rows.length(); i++)
+            {
+                JSONObject element = rows.getJSONObject(i);
+  
+                jcbGroups.addItem(element.getString("name"));
+            }
+       
+                        
+        } catch (IOException ex) {
+            Logger.getLogger(jpCreateTask.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+    
+    
+    
     private void jbCreateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCreateTaskActionPerformed
         try {
 
@@ -210,6 +258,25 @@ public class jpCreateTask extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnGoBackActionPerformed
 
+    private void jcbNotifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbNotifyActionPerformed
+        
+    }//GEN-LAST:event_jcbNotifyActionPerformed
+
+    private void jcbGroupsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbGroupsItemStateChanged
+        
+    }//GEN-LAST:event_jcbGroupsItemStateChanged
+
+    private void jcbNotifyItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbNotifyItemStateChanged
+        if(jcbNotify.isSelected())
+        {
+            jcbGroups.setEnabled(true);
+        }
+        else
+        {
+            jcbGroups.setEnabled(false);
+        }
+    }//GEN-LAST:event_jcbNotifyItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGoBack;
@@ -221,6 +288,7 @@ public class jpCreateTask extends javax.swing.JPanel {
     private javax.swing.JDialog jDialog2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbCreateTask;
+    private static javax.swing.JComboBox<String> jcbGroups;
     private javax.swing.JCheckBox jcbNotify;
     private org.jdesktop.swingx.JXDatePicker jdfTaskDueDate;
     private javax.swing.JLabel jlTaskDescription;

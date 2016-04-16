@@ -326,8 +326,9 @@ public class HTTPService {
         // This request must be authenticated
         post.setHeader("IstAuth", "Bearer " + access_token);
         post.setHeader("Content-Type","application/json");
-        
+       
         // Build our JSON payload
+        ///StringEntity input = new StringEntity("{\"table\": \"groups, usersGroupsLink\", \"fields\": \"groups.*\", \"where\": { \"groups.id\": \"usersGroupsLink.id\", \"usersGroupsLink.userId\":\"%USERID%\"}}");
         StringEntity input = new StringEntity("{\"table\": \"groups\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + 12 + "\"}}");
         post.setEntity(input);
         
@@ -361,14 +362,14 @@ public class HTTPService {
         
         // Connect out to the server URL
         HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost(server_url + "/querySelect");
+        HttpPost post = new HttpPost(server_url + "/leaveGroup");
         
         // This request must be authenticated
         post.setHeader("IstAuth", "Bearer " + access_token);
         post.setHeader("Content-Type","application/json");
         
         // Build our JSON payload
-        StringEntity input = new StringEntity("{\"table\": \"groups\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + 12 + "\"}}");
+        StringEntity input = new StringEntity("{ \"groupId\":" + id + "}");
         post.setEntity(input);
         
         // Call our server
@@ -376,7 +377,7 @@ public class HTTPService {
         BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
         String line = "";
         while ((line = rd.readLine()) != null) {
-            
+            System.out.println("line = " + line);
             // Return our JSON response
             return new JSONObject(line);
 

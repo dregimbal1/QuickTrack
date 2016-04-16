@@ -18,6 +18,7 @@ import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -76,19 +77,18 @@ public class jpManageGroups extends javax.swing.JPanel {
             {
                 public void actionPerformed(ActionEvent e)
                 {
-                    
-                    JTable table = (JTable)e.getSource();
-                    int modelRow = Integer.valueOf( e.getActionCommand() );
-                    ((DefaultTableModel)table.getModel()).removeRow(modelRow);
-                    
-                    // This is the ID of the group
-                    int id = Integer.parseInt(table.getModel().getValueAt(modelRow, 0).toString());
 
                     try {
+                        
+                        JTable table = (JTable)e.getSource();
+                        int modelRow = Integer.valueOf( e.getActionCommand() );
+                    
+                        // This is the ID of the group
+                        int id = Integer.parseInt(table.getModel().getValueAt(modelRow, 0).toString());
            
                         // Call our server and ask to be removed from the group
                         JSONObject response = HTTPService.leaveGroup(id);
-
+                            
                         // Determines success and lets us know about it with a popup
                         if("error".equals(response.getString("status")))
                         {
@@ -97,6 +97,7 @@ public class jpManageGroups extends javax.swing.JPanel {
                         }
                         else
                         {
+                            ((DefaultTableModel)table.getModel()).removeRow(modelRow);
                             JFrame PopUp = new JFrame();
                             JOptionPane.showMessageDialog(PopUp,"You left the group!");
 
@@ -104,15 +105,14 @@ public class jpManageGroups extends javax.swing.JPanel {
                     } catch (IOException ex) {
                         Logger.getLogger(jpCreateTask.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
-                    
+                          
                 }
 
 
             };
 
             // This binds our JButton render with column 5
-            ButtonColumn buttonColumn = new ButtonColumn(jtGroups, leave, 5);
+            ButtonColumn buttonColumn = new ButtonColumn(jtGroups, leave, 3);
             buttonColumn.setMnemonic(KeyEvent.VK_D);
 
 

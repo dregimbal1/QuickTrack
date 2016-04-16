@@ -139,6 +139,7 @@ public class jpOverview extends javax.swing.JPanel {
 
     private void btnAddTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTaskActionPerformed
 
+        jpCreateTask.setjcbGroups();
         // Switch the panel to jpOverview
         Container parent = this.getParent(); 
         LayoutManager layout = getParent().getLayout();

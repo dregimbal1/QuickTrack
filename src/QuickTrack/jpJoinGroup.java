@@ -108,7 +108,7 @@ public class jpJoinGroup extends javax.swing.JPanel {
         LayoutManager layout = getParent().getLayout();
         if (layout instanceof CardLayout) {
             CardLayout cardLayout = (CardLayout)layout;
-            cardLayout.show(parent, "jpOverview");
+            cardLayout.show(parent, "jpGroups");
         }
     }//GEN-LAST:event_btnGoBackActionPerformed
 
