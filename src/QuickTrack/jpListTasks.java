@@ -17,11 +17,14 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 //import javax.swing.AbstractCellEditor;
 import javax.swing.Action;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 //import javax.swing.table.TableCellRenderer;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+//import QuickTrack.jpEditTask;
 
 /**
  *
@@ -78,11 +81,22 @@ public class jpListTasks extends javax.swing.JPanel {
                     
                     JTable table = (JTable)e.getSource();
                     int modelRow = Integer.valueOf( e.getActionCommand() );
+                    
                     // This holds the id to this task
                     int id = Integer.parseInt(table.getModel().getValueAt(modelRow, 0).toString());
              
-                    // Do something here like show a popup for edit task
+                    // Create a new JFrame to display the edit window
+                    JFrame frame = new JFrame("Edit Task ID " + id);
                     
+                    // Apply the editTask JPanel
+                    frame.getContentPane().add(new jpEditTask(id));
+                    
+                    // Init
+                    frame.setResizable(false);
+                    frame.pack();
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+
                     
                 }
 

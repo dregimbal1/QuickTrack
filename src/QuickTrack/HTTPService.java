@@ -187,6 +187,46 @@ public class HTTPService {
     }
     
     /**
+     * getGroupTasks.
+     * get all tasks for a specific user
+     * 
+     * @return JSONObject callback
+     * @throws org.apache.http.client.ClientProtocolException 
+     */
+    public static JSONObject getGroupTasks() throws ClientProtocolException, IOException
+    {
+        
+        // initialize our object
+        JSONObject callback = new JSONObject();
+        
+        // Connect out to the server URL
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(server_url + "/querySelect");
+        
+        // This request must be authenticated
+        post.setHeader("IstAuth", "Bearer " + access_token);
+        post.setHeader("Content-Type","application/json");
+        
+        // Build our JSON payload
+        StringEntity input = new StringEntity("{\"table\": \"tasks\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + 12 + "\"}}");
+        post.setEntity(input);
+        
+        // Call our server
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            
+            // Return our JSON response
+            return new JSONObject(line);
+
+        }
+     
+        // Promise
+        return callback;
+    }
+    
+    /**
      * getTasks.
      * get all tasks for a specific user
      * 
@@ -390,24 +430,36 @@ public class HTTPService {
     public static JSONObject getTask(int id) throws IOException
     {
         
+                
+        // initialize our object
         JSONObject callback = new JSONObject();
         
         // Connect out to the server URL
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(server_url + "/querySelect");
+        
+        // This request must be authenticated
+        post.setHeader("IstAuth", "Bearer " + access_token);
+        post.setHeader("Content-Type","application/json");
+        
+        // Build our JSON payload
         StringEntity input = new StringEntity("{\"table\": \"tasks\", \"where\":{ \"id\":"+id+"}}");
         post.setEntity(input);
+        
+        // Call our server
         HttpResponse response = client.execute(post);
         BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
         String line = "";
         while ((line = rd.readLine()) != null) {
-         
-         return new JSONObject(line);
+            
+            // Return our JSON response
+            return new JSONObject(line);
 
         }
-        
+     
         // Promise
         return callback;
+        
     }
         
     public static JSONObject getDetails() throws IOException

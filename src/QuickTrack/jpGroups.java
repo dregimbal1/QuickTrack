@@ -8,6 +8,17 @@ package QuickTrack;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -22,6 +33,71 @@ public class jpGroups extends javax.swing.JPanel {
     public jpGroups() {
         initComponents();
     }
+    
+    public static void setAssignments()
+    {
+        
+        try {
+
+            // Start by calling our server for tasks associated with this user
+            JSONObject response = HTTPService.getGroupTasks();
+            
+            // Grab the response from our call
+            JSONArray rows = response.getJSONArray("response");
+            
+            // Init our JTable for later
+            DefaultTableModel model = (DefaultTableModel) jtAssignments.getModel();
+            
+            // Reset the JTable in case we are back a second time
+            model.setColumnCount(0);
+            model.setRowCount(0);
+
+            // Declare column headers
+            model.addColumn("id");
+            model.addColumn("name");
+            model.addColumn("description");
+            model.addColumn("duedate");
+            model.addColumn("notify");
+            model.addColumn("");
+
+            // Iterate over our response and add rows
+            for(int i = 0; i < rows.length(); i++)
+            {
+                JSONObject element = rows.getJSONObject(i);
+                model.addRow(new Object[] { element.getString("id"), element.getString("name"), element.getString("description"), element.getString("duedate"), element.getString("notify"), "edit"  });
+            }
+
+            // Declare our edit action for our JButton
+            Action edit = new AbstractAction()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    
+                    JTable table = (JTable)e.getSource();
+                    int modelRow = Integer.valueOf( e.getActionCommand() );
+                    // This holds the id to this task
+                    int id = Integer.parseInt(table.getModel().getValueAt(modelRow, 0).toString());
+             
+                    // Do something here like show a popup for edit task
+                    
+                    
+                }
+
+
+            };
+
+            // Bind our action to the 5th column 
+            ButtonColumn buttonColumn = new ButtonColumn(jtAssignments, edit, 5);
+            buttonColumn.setMnemonic(KeyEvent.VK_D);
+
+
+        } catch (IOException ex) {
+            
+            // Fatal error; The program could not render/compile
+            Logger.getLogger(jpOverview.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,11 +108,12 @@ public class jpGroups extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDatePickerUtil1 = new net.sourceforge.jdatepicker.util.JDatePickerUtil();
         btnGoBack = new javax.swing.JButton();
         btnJoinGroup = new javax.swing.JButton();
         btnManageGroups = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtGroupAssignments = new javax.swing.JTable();
+        jtAssignments = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnCreateGroup = new javax.swing.JButton();
 
@@ -61,7 +138,7 @@ public class jpGroups extends javax.swing.JPanel {
             }
         });
 
-        jtGroupAssignments.setModel(new javax.swing.table.DefaultTableModel(
+        jtAssignments.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,7 +149,7 @@ public class jpGroups extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtGroupAssignments);
+        jScrollPane1.setViewportView(jtAssignments);
 
         jLabel1.setText("Group Assignments");
 
@@ -169,8 +246,9 @@ public class jpGroups extends javax.swing.JPanel {
     private javax.swing.JButton btnGoBack;
     private javax.swing.JButton btnJoinGroup;
     private javax.swing.JButton btnManageGroups;
+    private net.sourceforge.jdatepicker.util.JDatePickerUtil jDatePickerUtil1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtGroupAssignments;
+    private static javax.swing.JTable jtAssignments;
     // End of variables declaration//GEN-END:variables
 }
