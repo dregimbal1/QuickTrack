@@ -5,11 +5,16 @@
  */
 package QuickTrack;
 
+import java.awt.CardLayout;
+import java.awt.Container;
+import java.awt.LayoutManager;
 import java.awt.Window;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.json.JSONObject;
 
 /**
@@ -173,7 +178,34 @@ public class jpEditTask extends javax.swing.JPanel {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
         
-        // update http code
+        try {
+
+            // start by calling our server to add a task
+            JSONObject response = HTTPService.editTask(taskId, txtName.getText(), jtaTaskDescription.getText(), jdfTaskDueDate.getDate());
+            System.out.println("response = " + response);
+            // Display a message and returns us home on success
+            if("error".equals(response.getString("status")))
+            {
+                JFrame PopUp = new JFrame();
+                JOptionPane.showMessageDialog(PopUp,"There was a problem updating this task. Try again!");               
+            }
+            else
+            {
+                // Update List Tasks
+                jpListTasks.setTasks();
+                
+                // Let them know about it
+                JFrame PopUp = new JFrame();
+                JOptionPane.showMessageDialog(PopUp,"Task Updated");
+                
+                // Close the popup
+                ((Window) getRootPane().getParent()).dispose();
+
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(jpCreateTask.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnUpdateActionPerformed
 

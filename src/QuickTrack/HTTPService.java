@@ -41,6 +41,7 @@ public class HTTPService {
     // local store and initialize
     public static String access_token = "";
     public static String server_url = "";
+    public static int userId;
     
     /**
      * Login Service.
@@ -187,6 +188,49 @@ public class HTTPService {
     }
     
     /**
+     * editTask.
+     * Update an already made task
+     * 
+     * @return JSONObject callback
+     * @throws org.apache.http.client.ClientProtocolException 
+     */
+    public static JSONObject editTask(int id, String name, String description, Date date) throws ClientProtocolException, IOException
+    {
+        
+        // initialize our object
+        JSONObject callback = new JSONObject();
+        
+        // Connect out to the server URL
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(server_url + "/queryUpdate");
+        
+        // This request must be authenticated
+        post.setHeader("IstAuth", "Bearer " + access_token);
+        post.setHeader("Content-Type","application/json");
+        
+        // convert due date to UNIX
+        long unixTime = date.getTime()/1000;
+        
+        // Build our JSON payload
+        StringEntity input = new StringEntity("{\"table\":\"tasks\", \"id\": "+id+",\"data\":{\"name\":\""+name+"\",\"description\":\""+description+"\",\"duedate\":\""+date+"\"}}");
+        post.setEntity(input);
+        
+        // Call our server
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+         
+            // Return our JSON response
+            return new JSONObject(line);
+
+        }
+     
+        // Promise
+        return callback;
+    }
+    
+    /**
      * getGroupTasks.
      * get all tasks for a specific user
      * 
@@ -208,7 +252,7 @@ public class HTTPService {
         post.setHeader("Content-Type","application/json");
         
         // Build our JSON payload
-        StringEntity input = new StringEntity("{\"table\": \"tasks\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + 12 + "\"}}");
+        StringEntity input = new StringEntity("{\"table\": \"tasks\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + userId + "\"}}");
         post.setEntity(input);
         
         // Call our server
@@ -248,7 +292,7 @@ public class HTTPService {
         post.setHeader("Content-Type","application/json");
         
         // Build our JSON payload
-        StringEntity input = new StringEntity("{\"table\": \"tasks\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + 12 + "\"}}");
+        StringEntity input = new StringEntity("{\"table\": \"tasks\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + userId + "\"}}");
         post.setEntity(input);
         
         // Call our server
@@ -328,7 +372,7 @@ public class HTTPService {
         post.setHeader("Content-Type","application/json");
         
         // Build our JSON payload
-        StringEntity input = new StringEntity("{\"table\": \"groups\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + 12 + "\"}}");
+        StringEntity input = new StringEntity("{\"table\": \"groups\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + userId + "\"}}");
         post.setEntity(input);
         
         // Call our server
@@ -369,7 +413,7 @@ public class HTTPService {
        
         // Build our JSON payload
         ///StringEntity input = new StringEntity("{\"table\": \"groups, usersGroupsLink\", \"fields\": \"groups.*\", \"where\": { \"groups.id\": \"usersGroupsLink.id\", \"usersGroupsLink.userId\":\"%USERID%\"}}");
-        StringEntity input = new StringEntity("{\"table\": \"groups\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + 12 + "\"}}");
+        StringEntity input = new StringEntity("{\"table\": \"groups\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + userId + "\"}}");
         post.setEntity(input);
         
         // Call our server
@@ -479,7 +523,11 @@ public class HTTPService {
             String line = "";
             
             while ((line = rd.readLine()) != null) {
+                
               callback = new JSONObject(line);
+              JSONObject data = (JSONObject) callback.get("response");
+              userId = Integer.parseInt(data.getString("id"));
+              
               return callback;
             }
             
