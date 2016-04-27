@@ -43,6 +43,15 @@ public class HTTPService {
     public static String server_url = "";
     public static int userId;
     
+    LocalStorage storage = new LocalStorage();
+    
+    public HTTPService()
+    {
+        access_token = storage.get("access_token");
+        server_url = storage.get("server_url");
+        userId = Integer.parseInt(storage.get("userId"));
+    }
+    
     /**
      * Login Service.
      * Request the server to login a user. 
@@ -82,7 +91,7 @@ public class HTTPService {
              // Login success; Set and store the access token
              JSONObject data = (JSONObject) callback.get("response");
              access_token = data.getString("token");
-
+             storage.set("access_token", access_token);
          }
          
          return callback;
@@ -133,7 +142,7 @@ public class HTTPService {
              // Register success; Set and store the access token
              JSONObject data = (JSONObject) callback.get("response");
              access_token = data.getString("token");
-
+             storage.set("access_token", access_token);
          }
          
          return callback;
@@ -527,7 +536,7 @@ public class HTTPService {
               callback = new JSONObject(line);
               JSONObject data = (JSONObject) callback.get("response");
               userId = Integer.parseInt(data.getString("id"));
-              
+
               return callback;
             }
             
