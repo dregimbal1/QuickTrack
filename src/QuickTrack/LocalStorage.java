@@ -55,19 +55,4 @@ public class LocalStorage {
         return null;
     }
  
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
- 
-        LocalStorage t = new LocalStorage();
-        
-       // t.set("test","hello world!");
-        
-        System.out.println(t.get("test"));
-        
-        
-    }
- 
 }
