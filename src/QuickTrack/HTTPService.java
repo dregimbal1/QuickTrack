@@ -252,7 +252,7 @@ public class HTTPService {
         post.setHeader("Content-Type","application/json");
         
         // Build our JSON payload
-        StringEntity input = new StringEntity("{\"table\": \"tasks\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + userId + "\"}}");
+        StringEntity input = new StringEntity("{\"table\": \"tasks\", \"fields\": \"*\", \"where\": { \"createdBy\":\"" + userId + "\", \"notify\": \"true\"}}");
         post.setEntity(input);
         
         // Call our server

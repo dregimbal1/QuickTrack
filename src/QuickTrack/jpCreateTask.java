@@ -220,7 +220,7 @@ public class jpCreateTask extends javax.swing.JPanel {
 
             // start by calling our server to add a task
             JSONObject response = HTTPService.addTask(txtName.getText(), jtaTaskDescription.getText(), jdfTaskDueDate.getDate(), jcbNotify.isSelected());
-            
+            System.out.println("response = " + response);
             // Display a message and returns us home on success
             if("error".equals(response.getString("status")))
             {

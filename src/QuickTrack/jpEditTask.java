@@ -5,9 +5,6 @@
  */
 package QuickTrack;
 
-import java.awt.CardLayout;
-import java.awt.Container;
-import java.awt.LayoutManager;
 import java.awt.Window;
 import java.io.IOException;
 import java.text.ParseException;
@@ -193,6 +190,7 @@ public class jpEditTask extends javax.swing.JPanel {
             {
                 // Update List Tasks
                 jpListTasks.setTasks();
+                jpGroups.setAssignments();
                 
                 // Let them know about it
                 JFrame PopUp = new JFrame();
