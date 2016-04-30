@@ -38,9 +38,8 @@ public class jfMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jpMain = new javax.swing.JPanel();
         jpLogin = new QuickTrack.jpLogin();
-        jpRegister = new QuickTrack.jpRegister();
+        jpMain = new javax.swing.JPanel();
         jpCreateTask = new QuickTrack.jpCreateTask();
         jpOverview = new QuickTrack.jpOverview();
         jpListTasks = new QuickTrack.jpListTasks();
@@ -48,12 +47,11 @@ public class jfMain extends javax.swing.JFrame {
         jpJoinGroup = new QuickTrack.jpJoinGroup();
         jpManageGroups = new QuickTrack.jpManageGroups();
         jpCreateGroup = new QuickTrack.jpCreateGroup();
+        jpRegister = new QuickTrack.jpRegister();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jpMain.setLayout(new java.awt.CardLayout());
-        jpMain.add(jpLogin, "jpLogin");
-        jpMain.add(jpRegister, "jpRegister");
         jpMain.add(jpCreateTask, "jpCreateTask");
         jpMain.add(jpOverview, "jpOverview");
         jpMain.add(jpListTasks, "jpListTasks");
@@ -62,21 +60,23 @@ public class jfMain extends javax.swing.JFrame {
         jpMain.add(jpManageGroups, "jpManageGroups");
         jpMain.add(jpCreateGroup, "jpCreateGroup");
 
+        jpRegister.setBackground(new java.awt.Color(0, 153, 153));
+        jpMain.add(jpRegister, "jpRegister");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
+                .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpMain, javax.swing.GroupLayout.PREFERRED_SIZE, 292, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE))
         );
 
         pack();
