@@ -5,6 +5,7 @@ This is a Penn State Berks IST 411 group project designed in Netbeans. This java
 ### Installation
   - Open the project in Netbeans
   - Build
+
 License
 ----
 GNU GENERAL PUBLIC LICENSE
