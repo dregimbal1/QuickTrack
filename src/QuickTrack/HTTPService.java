@@ -45,12 +45,14 @@ public class HTTPService {
     
     LocalStorage storage = new LocalStorage();
     
+    /*
     public HTTPService()
     {
         access_token = storage.get("access_token");
         server_url = storage.get("server_url");
         userId = Integer.parseInt(storage.get("userId"));
     }
+    */
     
     /**
      * Login Service.
