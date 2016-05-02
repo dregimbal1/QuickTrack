@@ -120,6 +120,7 @@ public class jpGroups extends javax.swing.JPanel {
     private void initComponents() {
 
         jDatePickerUtil1 = new net.sourceforge.jdatepicker.util.JDatePickerUtil();
+        label5 = new java.awt.Label();
         btnGoBack = new javax.swing.JButton();
         btnJoinGroup = new javax.swing.JButton();
         btnManageGroups = new javax.swing.JButton();
@@ -127,7 +128,15 @@ public class jpGroups extends javax.swing.JPanel {
         jtAssignments = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnCreateGroup = new javax.swing.JButton();
+        label6 = new java.awt.Label();
 
+        label5.setFont(new java.awt.Font("Modern No. 20", 0, 36)); // NOI18N
+        label5.setText("Quick Track");
+
+        setBackground(new java.awt.Color(0, 153, 153));
+
+        btnGoBack.setBackground(new java.awt.Color(51, 51, 51));
+        btnGoBack.setForeground(new java.awt.Color(204, 204, 204));
         btnGoBack.setText("Go Back");
         btnGoBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +144,8 @@ public class jpGroups extends javax.swing.JPanel {
             }
         });
 
+        btnJoinGroup.setBackground(new java.awt.Color(51, 51, 51));
+        btnJoinGroup.setForeground(new java.awt.Color(204, 204, 204));
         btnJoinGroup.setText("Join");
         btnJoinGroup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,12 +153,16 @@ public class jpGroups extends javax.swing.JPanel {
             }
         });
 
+        btnManageGroups.setBackground(new java.awt.Color(51, 51, 51));
+        btnManageGroups.setForeground(new java.awt.Color(204, 204, 204));
         btnManageGroups.setText("Manage");
         btnManageGroups.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageGroupsActionPerformed(evt);
             }
         });
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         jtAssignments.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -162,8 +177,11 @@ public class jpGroups extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jtAssignments);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Group Assignments");
 
+        btnCreateGroup.setBackground(new java.awt.Color(51, 51, 51));
+        btnCreateGroup.setForeground(new java.awt.Color(204, 204, 204));
         btnCreateGroup.setText("Create");
         btnCreateGroup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,42 +189,53 @@ public class jpGroups extends javax.swing.JPanel {
             }
         });
 
+        label6.setFont(new java.awt.Font("Modern No. 20", 0, 36)); // NOI18N
+        label6.setText("Quick Track");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnManageGroups)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnCreateGroup)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnJoinGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGoBack))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(206, 206, 206)
+                .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(235, 235, 235))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGoBack)
                     .addComponent(btnJoinGroup)
-                    .addComponent(btnManageGroups)
-                    .addComponent(btnCreateGroup)))
+                    .addComponent(btnGoBack)
+                    .addComponent(btnCreateGroup)
+                    .addComponent(btnManageGroups))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -261,5 +290,7 @@ public class jpGroups extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable jtAssignments;
+    private java.awt.Label label5;
+    private java.awt.Label label6;
     // End of variables declaration//GEN-END:variables
 }

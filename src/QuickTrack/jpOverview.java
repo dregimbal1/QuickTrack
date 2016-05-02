@@ -71,9 +71,15 @@ public class jpOverview extends javax.swing.JPanel {
         btnListTasks = new javax.swing.JButton();
         btnGroups = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
+        label5 = new java.awt.Label();
 
+        setBackground(new java.awt.Color(0, 153, 153));
+
+        lblWelcomeMessage.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblWelcomeMessage.setText("Welcome back!");
 
+        btnAddTask.setBackground(new java.awt.Color(51, 51, 51));
+        btnAddTask.setForeground(new java.awt.Color(204, 204, 204));
         btnAddTask.setText("Add Task");
         btnAddTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +87,8 @@ public class jpOverview extends javax.swing.JPanel {
             }
         });
 
+        btnListTasks.setBackground(new java.awt.Color(51, 51, 51));
+        btnListTasks.setForeground(new java.awt.Color(204, 204, 204));
         btnListTasks.setText("List Tasks");
         btnListTasks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +96,8 @@ public class jpOverview extends javax.swing.JPanel {
             }
         });
 
+        btnGroups.setBackground(new java.awt.Color(51, 51, 51));
+        btnGroups.setForeground(new java.awt.Color(204, 204, 204));
         btnGroups.setText("Groups");
         btnGroups.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +105,8 @@ public class jpOverview extends javax.swing.JPanel {
             }
         });
 
+        btnExit.setBackground(new java.awt.Color(51, 51, 51));
+        btnExit.setForeground(new java.awt.Color(204, 204, 204));
         btnExit.setText("Exit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,37 +114,49 @@ public class jpOverview extends javax.swing.JPanel {
             }
         });
 
+        label5.setFont(new java.awt.Font("Modern No. 20", 0, 36)); // NOI18N
+        label5.setText("Quick Track");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblWelcomeMessage)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnGroups)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnListTasks, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAddTask)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(btnGroups)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAddTask)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnListTasks, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnExit)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(90, 90, 90))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addComponent(lblWelcomeMessage)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
                 .addComponent(lblWelcomeMessage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddTask)
-                    .addComponent(btnListTasks)
                     .addComponent(btnGroups)
-                    .addComponent(btnExit))
+                    .addComponent(btnListTasks)
+                    .addComponent(btnAddTask))
+                .addGap(81, 81, 81)
+                .addComponent(btnExit)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -185,6 +209,7 @@ public class jpOverview extends javax.swing.JPanel {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGroups;
     private javax.swing.JButton btnListTasks;
+    private java.awt.Label label5;
     private static javax.swing.JLabel lblWelcomeMessage;
     // End of variables declaration//GEN-END:variables
 }
