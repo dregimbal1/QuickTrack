@@ -36,6 +36,26 @@ public class jpLogin extends javax.swing.JPanel {
      */
     public jpLogin() {
         initComponents();
+        lblLoading.setVisible(false);
+    }
+    
+    private void isLoading(Boolean flag)
+    {
+        System.out.println("isLoading called! " + flag);
+        Boolean doSwitch = (flag)?false:true;
+        System.out.println("doSwitch = " + doSwitch);
+        lblTitle.setVisible(doSwitch);
+        lblDescription.setVisible(doSwitch);
+        lblUsername.setVisible(doSwitch);
+        txtUsername.setVisible(doSwitch);
+        lblPassword.setVisible(doSwitch);
+        txtPassword.setVisible(doSwitch);
+        lblServerUrl.setVisible(doSwitch);
+        txtServerUrl.setVisible(doSwitch);
+        lblServerKey.setVisible(doSwitch);
+        txtServerKey.setVisible(doSwitch);
+        
+        lblLoading.setVisible(!doSwitch);
     }
 
     /**
@@ -58,8 +78,9 @@ public class jpLogin extends javax.swing.JPanel {
         lblServerKey = new javax.swing.JLabel();
         lblError = new javax.swing.JLabel();
         btnCreateAccount = new javax.swing.JButton();
-        label5 = new java.awt.Label();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitle = new java.awt.Label();
+        lblDescription = new javax.swing.JLabel();
+        lblLoading = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -97,64 +118,78 @@ public class jpLogin extends javax.swing.JPanel {
             }
         });
 
-        label5.setFont(new java.awt.Font("Modern No. 20", 0, 36)); // NOI18N
-        label5.setText("Quick Track");
+        lblTitle.setFont(new java.awt.Font("Modern No. 20", 0, 36)); // NOI18N
+        lblTitle.setText("Quick Track");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Log IN");
+        lblDescription.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblDescription.setText("Login");
+
+        lblLoading.setText("One moment please....");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 17, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 77, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(98, 98, 98))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblPassword)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblServerUrl)
+                                    .addComponent(lblPassword)
                                     .addGap(18, 18, 18)
-                                    .addComponent(txtServerUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblUsername)
+                                    .addGap(2, 2, 2)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblServerUrl)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(txtServerUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblServerKey)
                                     .addGap(18, 18, 18)
-                                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtServerKey, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblServerKey)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtServerKey, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(185, 185, 185))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                                .addComponent(lblUsername)
+                                .addGap(158, 158, 158)))
+                        .addGap(185, 185, 185))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(237, 237, 237))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblLoading)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblDescription)
+                        .addGap(237, 237, 237))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(btnCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLoading))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
+                .addComponent(lblDescription)
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsername)
@@ -173,9 +208,9 @@ public class jpLogin extends javax.swing.JPanel {
                     .addComponent(txtServerKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogin)
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCreateAccount)
-                .addContainerGap())
+                .addGap(38, 38, 38))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -194,6 +229,8 @@ public class jpLogin extends javax.swing.JPanel {
       
         try {
             
+            // Lets load!!!!!!
+            isLoading(true);
             // Send login details to our HTTP Service
             JSONObject response = new HTTPService().login(txtServerUrl.getText(), txtUsername.getText(), new String(txtPassword.getPassword()));
             
@@ -209,6 +246,7 @@ public class jpLogin extends javax.swing.JPanel {
                 // Fetch some useful details about the user
                 jpOverview.getAboutMe();
                 
+                
                 // Switch the panel to jpOverview
                 Container parent = this.getParent(); 
                 LayoutManager layout = getParent().getLayout();
@@ -216,6 +254,9 @@ public class jpLogin extends javax.swing.JPanel {
                     CardLayout cardLayout = (CardLayout)layout;
                     cardLayout.show(parent, "jpOverview");
                 }
+                
+                // done loading!!
+                isLoading(false);
                 
             }
             
@@ -244,12 +285,13 @@ public class jpLogin extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateAccount;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JLabel jLabel1;
-    private java.awt.Label label5;
+    private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblError;
+    private javax.swing.JLabel lblLoading;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblServerKey;
     private javax.swing.JLabel lblServerUrl;
+    private java.awt.Label lblTitle;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtServerKey;

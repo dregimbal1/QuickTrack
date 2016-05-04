@@ -72,6 +72,7 @@ public class jpOverview extends javax.swing.JPanel {
         btnGroups = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         label5 = new java.awt.Label();
+        btnListTasks1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -107,7 +108,7 @@ public class jpOverview extends javax.swing.JPanel {
 
         btnExit.setBackground(new java.awt.Color(51, 51, 51));
         btnExit.setForeground(new java.awt.Color(204, 204, 204));
-        btnExit.setText("Exit");
+        btnExit.setText("Logout");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -117,45 +118,56 @@ public class jpOverview extends javax.swing.JPanel {
         label5.setFont(new java.awt.Font("Modern No. 20", 0, 36)); // NOI18N
         label5.setText("Quick Track");
 
+        btnListTasks1.setBackground(new java.awt.Color(51, 51, 51));
+        btnListTasks1.setForeground(new java.awt.Color(204, 204, 204));
+        btnListTasks1.setText("Calendar");
+        btnListTasks1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListTasks1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(btnGroups)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAddTask)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnListTasks, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnExit)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90))))
+                        .addGap(90, 90, 90))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnExit)
+                        .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
-                .addGap(108, 108, 108)
+                .addGap(59, 59, 59)
                 .addComponent(lblWelcomeMessage)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btnListTasks1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGroups)
+                .addGap(18, 18, 18)
+                .addComponent(btnAddTask)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnListTasks, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addGap(46, 46, 46)
                 .addComponent(lblWelcomeMessage)
-                .addGap(44, 44, 44)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGroups)
                     .addComponent(btnListTasks)
-                    .addComponent(btnAddTask))
-                .addGap(81, 81, 81)
+                    .addComponent(btnAddTask)
+                    .addComponent(btnListTasks1))
+                .addGap(150, 150, 150)
                 .addComponent(btnExit)
                 .addContainerGap())
         );
@@ -200,8 +212,18 @@ public class jpOverview extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGroupsActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        System.exit(0);
+ 
+        HTTPService.storage.set("access_token","");
+
+        System.exit(0);  
+
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnListTasks1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListTasks1ActionPerformed
+        // TODO add your handling code here:
+        Calendars Calendar = new Calendars();
+       Calendar.setVisible(true);
+    }//GEN-LAST:event_btnListTasks1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -209,6 +231,7 @@ public class jpOverview extends javax.swing.JPanel {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGroups;
     private javax.swing.JButton btnListTasks;
+    private javax.swing.JButton btnListTasks1;
     private java.awt.Label label5;
     private static javax.swing.JLabel lblWelcomeMessage;
     // End of variables declaration//GEN-END:variables

@@ -38,12 +38,13 @@ import org.apache.http.client.methods.HttpGet;
  */
 public class HTTPService {
     
+    public static LocalStorage storage = new LocalStorage();
+    
     // local store and initialize
-    public static String access_token = "";
-    public static String server_url = "";
+    public static String access_token = storage.get("access_token");
+    public static String server_url = storage.get("server_url");
     public static int userId;
     
-    LocalStorage storage = new LocalStorage();
     
     /*
     public HTTPService()
@@ -72,6 +73,7 @@ public class HTTPService {
         
         // set the server_url and localstorage
         server_url = serverUrl;
+        storage.set("server_url", server_url);
         
         // Connect out to the server URL
         HttpClient client = new DefaultHttpClient();
@@ -123,6 +125,7 @@ public class HTTPService {
         
         // set the server_url and localstorage
         server_url = serverUrl;
+        storage.set("server_url", server_url);
         
         // Connect out to the server URL
         HttpClient client = new DefaultHttpClient();
@@ -181,6 +184,47 @@ public class HTTPService {
         
         // Build our JSON payload
         StringEntity input = new StringEntity("{\"table\": \"tasks\", \"data\": { \"name\": \""+name+"\", \"description\": \""+description+"\", \"duedate\": \""+unixTime+"\", \"notify\": \""+notify.booleanValue()+"\"  }}");
+        post.setEntity(input);
+        
+        // Call our server
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+         
+            // Return our JSON response
+            return new JSONObject(line);
+
+        }
+     
+        // Promise
+        return callback;
+    }
+    
+    /**
+     * deleteTask.
+     * delete a task
+     * 
+     * @return JSONObject callback
+     * @throws org.apache.http.client.ClientProtocolException 
+     */
+    public static JSONObject deleteTask(int id) throws ClientProtocolException, IOException
+    {
+        
+        // initialize our object
+        JSONObject callback = new JSONObject();
+        
+        // Connect out to the server URL
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(server_url + "/queryDelete");
+        
+        // This request must be authenticated
+        post.setHeader("IstAuth", "Bearer " + access_token);
+        post.setHeader("Content-Type","application/json");
+        
+        
+        // Build our JSON payload
+        StringEntity input = new StringEntity("{\"table\": \"tasks\", \"id\": "+id+"}");
         post.setEntity(input);
         
         // Call our server

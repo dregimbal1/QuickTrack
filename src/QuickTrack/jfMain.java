@@ -22,11 +22,31 @@ import javax.xml.ws.Action;
  */
 public class jfMain extends javax.swing.JFrame {
 
+    //LocalStorage storage = new LocalStorage();
+    
     /**
      * Creates new form jfMain
      */
     public jfMain() {
         initComponents();
+        checkLogin();
+    }
+    
+    private void checkLogin()
+    {
+        /*
+        String access_token = HTTPService.storage.get("access_token");
+        
+        if(!access_token.isEmpty())
+        {
+   
+            System.out.println("User already logged in!");
+            System.out.println(access_token);
+
+            CardLayout cl = (CardLayout) jpMain.getLayout();
+            cl.show(jpMain, "jpOverview");
+        }
+        */
     }
 
     /**
@@ -68,7 +88,7 @@ public class jfMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
+                .addComponent(jpMain, javax.swing.GroupLayout.PREFERRED_SIZE, 463, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

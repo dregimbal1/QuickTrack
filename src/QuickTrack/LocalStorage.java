@@ -34,10 +34,13 @@ public class LocalStorage {
     
     public void set(String name, String value)
     {
-        String query = "INSERT OR IGNORE INTO quicktrack VALUES (\""+name+"\", \""+value+"\");\n" +
-            "UPDATE quicktrack SET value = value WHERE name = \""+name+"\";";
+        String query = "INSERT OR IGNORE INTO quicktrack VALUES (\""+name+"\", \""+value+"\")";
+        String update = "UPDATE quicktrack SET value = \""+value+"\" WHERE name = \""+name+"\";";  
+       
         try {
             s.execute(query);
+            s.execute(update);
+            s.close();
         } catch (SQLException ex) {
             Logger.getLogger(LocalStorage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -45,14 +48,30 @@ public class LocalStorage {
     
     public String get(String name)
     {
-        String query = "SELECT value FROM quicktrack WHERE name = \""+name+"\"";
         try {
+            
+            String query = "SELECT value FROM quicktrack WHERE name = \""+name+"\"";
+            
             ResultSet result = s.executeQuery(query);
-            return result.getString("value");
+      
+            if(result.next())
+            {
+              return result.getString("value");  
+            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(LocalStorage.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public void close()
+    {
+        try {
+            c.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(LocalStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
  
 }
